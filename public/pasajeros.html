@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="styles.css" />
 		<title>Pasajeros</title>
 	</head>
 	<body>
@@ -11,17 +10,18 @@
 		<input type="text" id="nombrePasajero" placeholder="Nombre" />
 		<button onclick="loginPasajero()">Iniciar Sesión</button>
 
-		<div id="viaje" style="display: none">
-			<h3>Conductores disponibles</h3>
-			<div id="conductoresDisponibles"></div>
-
-			<h3>A dónde vas?</h3>
-			<input type="text" id="origen" placeholder="Origen" />
-			<input type="text" id="destino" placeholder="Destino" />
+		<div id="solicitarViajeForm" style="display: none">
+			<h3>Solicitar Viaje</h3>
+			<label>Origen:</label>
+			<input type="text" id="origen" />
+			<label>Destino:</label>
+			<input type="text" id="destino" />
 			<button onclick="solicitarViaje()">Solicitar Viaje</button>
 		</div>
 
-		<!-- Añadir el script de Socket.IO -->
+		<h3>Conductores Disponibles</h3>
+		<ul id="listaConductores"></ul>
+
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="pasajeros.js"></script>
 	</body>

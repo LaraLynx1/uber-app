@@ -1,49 +1,32 @@
-const socket = io(); // Conectar a Socket.IO
+const socket = io();
 
-let nombrePasajero = '';
-
-async function loginPasajero() {
-	nombrePasajero = document.getElementById('nombrePasajero').value;
-	if (!nombrePasajero) {
-		alert('Por favor, ingresa tu nombre.');
-		return;
-	}
-
-	document.getElementById('viaje').style.display = 'block';
-	actualizarConductores();
-}
-
-function actualizarConductores() {
-	// Solicitar la lista de conductores activos al servidor
-	fetch('/conductores/activos')
-		.then((response) => response.json())
-		.then((conductores) => {
-			const conductoresDisponiblesDiv = document.getElementById('conductoresDisponibles');
-			conductoresDisponiblesDiv.innerHTML = ''; // Limpiar la lista actual
-			conductores.forEach((conductor) => {
-				const conductorItem = document.createElement('div');
-				conductorItem.innerText = `Conductor: ${conductor.nombre} - Vehículo: ${conductor.placa}`;
-				conductoresDisponiblesDiv.appendChild(conductorItem);
-			});
-		});
+function loginPasajero() {
+	document.getElementById('solicitarViajeForm').style.display = 'block';
 }
 
 function solicitarViaje() {
 	const origen = document.getElementById('origen').value;
 	const destino = document.getElementById('destino').value;
+
 	if (!origen || !destino) {
-		alert('Por favor, ingresa el origen y destino.');
+		alert('Por favor, completa ambos campos.');
 		return;
 	}
 
-	// Ocultar botones y mostrar mensaje de "Buscando..."
-	document.getElementById('viaje').innerHTML = '<p>Buscando...</p>';
+	document.getElementById('solicitarViajeForm').style.display = 'none';
+	alert('Buscando conductor...');
 
-	// Emitir evento de solicitud de viaje al servidor
-	socket.emit('nuevoViaje', { nombrePasajero, origen, destino });
+	// Emitir evento de solicitud de viaje
+	socket.emit('solicitarViaje', { origen, destino, nombrePasajero: document.getElementById('nombrePasajero').value });
 }
 
-// Escuchar las actualizaciones de conductores activos
 socket.on('actualizarConductores', (conductoresActivos) => {
-	actualizarConductores();
+	const listaConductores = document.getElementById('listaConductores');
+	listaConductores.innerHTML = '';
+
+	conductoresActivos.forEach((conductor) => {
+		const item = document.createElement('li');
+		item.textContent = `${conductor.nombre} - ${conductor.vehiculo}`;
+		listaConductores.appendChild(item);
+	});
 });
