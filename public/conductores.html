@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles.css" />
+		<title>Conductores</title>
+	</head>
+	<body>
+		<h2>Iniciar Sesión como Conductor</h2>
+		<input type="text" id="nombreConductor" placeholder="Nombre" />
+		<button onclick="loginConductor()">Iniciar Sesión</button>
+
+		<div id="seleccionVehiculo" style="display: none">
+			<h3>Seleccionar Vehículo</h3>
+			<button onclick="seleccionarVehiculo('Vehículo A')">Vehículo A</button>
+			<button onclick="seleccionarVehiculo('Vehículo B')">Vehículo B</button>
+			<button onclick="seleccionarVehiculo('Vehículo C')">Vehículo C</button>
+		</div>
+
+		<div id="estadoConductor" style="display: none">
+			<h3>Estado del Conductor</h3>
+			<button onclick="cambiarEstado('activar')">Activar</button>
+			<button onclick="cambiarEstado('desactivar')">Desactivar</button>
+		</div>
+
+		<!-- Contenedor para mostrar los viajes pendientes -->
+		<div id="viajesPendientes"></div>
+
+		<!-- Añadir el script de Socket.IO -->
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="conductores.js"></script>
+	</body>
+</html>

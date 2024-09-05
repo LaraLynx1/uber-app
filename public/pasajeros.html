@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles.css" />
+		<title>Pasajeros</title>
+	</head>
+	<body>
+		<h2>Iniciar Sesión como Pasajero</h2>
+		<input type="text" id="nombrePasajero" placeholder="Nombre" />
+		<button onclick="loginPasajero()">Iniciar Sesión</button>
+
+		<div id="viaje" style="display: none">
+			<h3>Conductores disponibles</h3>
+			<div id="conductoresDisponibles"></div>
+
+			<h3>A dónde vas?</h3>
+			<input type="text" id="origen" placeholder="Origen" />
+			<input type="text" id="destino" placeholder="Destino" />
+			<button onclick="solicitarViaje()">Solicitar Viaje</button>
+		</div>
+
+		<!-- Añadir el script de Socket.IO -->
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="pasajeros.js"></script>
+	</body>
+</html>
